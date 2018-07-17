@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import cm.lua.moon.LuaRuntime;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,8 +33,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                LuaRuntime.exec("log(\"fuck...\")");
+
+                String showToast = "local toast = luajava.bindClass(\"android.widget.Toast\"):makeText(context(),\"I'm from lua script!\",1) toast:show()";
+                LuaRuntime.exec(showToast);
             }
         });
+
+        LuaRuntime.setupContext(this);
 
         state = LuaStateFactory.newLuaState();
         state.openLibs();
