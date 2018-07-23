@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import cm.lua.moon.LuaRuntime;
 
@@ -36,8 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
                 LuaRuntime.exec("log(\"fuck...\")");
 
-                String showToast = "local toast = luajava.bindClass(\"android.widget.Toast\"):makeText(context(),\"I'm from lua script!\",1) toast:show()";
-                LuaRuntime.exec(showToast);
+//                String showToast = "local toast = luajava.bindClass(\"android.widget.Toast\"):makeText(context(),\"I'm from lua script!\",1) toast:show()";
+//                LuaRuntime.exec(showToast);
+
+                String script = readAssets();
+                Log.e("ggg", "ggg script = " + script);
+                LuaRuntime.exec(script);
             }
         });
 
@@ -77,4 +83,25 @@ public class MainActivity extends AppCompatActivity {
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      */
+
+    private String readAssets() {
+        InputStream inputStream = null;
+        try {
+            inputStream = getAssets().open("test.lua");
+            byte[] bytes = new byte[inputStream.available()];
+            int len = inputStream.read(bytes);
+            return new String(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "";
+    }
 }
