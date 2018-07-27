@@ -16,6 +16,7 @@ import android.view.View;
 import java.io.IOException;
 import java.io.InputStream;
 
+import cm.lua.moon.LuaResult;
 import cm.lua.moon.LuaRuntime;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
                 String script = readAssets();
                 Log.e("ggg", "ggg script = " + script);
-                LuaRuntime.exec(script);
+                LuaResult result = LuaRuntime.exec(script);
+                Log.e("ggg", "ggg result = " + result.result);
             }
         });
 

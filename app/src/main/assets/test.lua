@@ -7,3 +7,4 @@ intent:setClassName("com.android.settings", "com.android.settings.Settings")
 
 local context = context()
 context:startActivity(intent)
+eval("跳转成功")
