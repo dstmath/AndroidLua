@@ -8,3 +8,5 @@
 /captures
 .externalNativeBuild
 .idea
+android-lua/src/main/libs/
+android-lua/src/main/obj/

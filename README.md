@@ -1,0 +1,1 @@
+需要用ndk-r16b编译，在local.properties里面，指定ndk.dir=r16b存放的路径
