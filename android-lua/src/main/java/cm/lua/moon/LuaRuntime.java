@@ -31,6 +31,11 @@ public class LuaRuntime {
         LuaJavaAPI.isDebug = z;
     }
 
+    /**
+     * ui相关操作必须在主线程执行：toast显示及activity跳转
+     * @param str
+     * @return
+     */
     public static LuaResult exec(String str) {
         return invoke(new LuaRequest.Builder().luaScript(str).build());
     }
